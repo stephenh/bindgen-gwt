@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project name="bindgen-gwt" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<import file="ivytargets.xml"/>
+
+	<target name="clean" description="delete the bin directory">
+		<delete dir="bin"/>
+	</target>
+
+	<target name="jar" description="builds bindgen-gwt.jar with a gwt.xml module">
+		<copy file="../bindgen/processor/bin/jars/bindgen.jar" tofile="bin/jars/bindgen-gwt.jar"/>
+		<jar destfile="bin/jars/bindgen-gwt.jar" update="true">
+			<fileset dir="../bindgen/processor/src/main/java" includes="org/bindgen/*.java,org/bindgen/binding/*.java"/>
+			<zipfileset dir="." includes="Bindgen.gwt.xml" prefix="org/bindgen"/>
+		</jar>
+		<copy file="../bindgen/processor/bin/sources/bindgen.jar" tofile="bin/sources/bindgen-gwt.jar"/>
+	</target>
+
+</project>
